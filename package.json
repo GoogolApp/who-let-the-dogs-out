@@ -38,6 +38,7 @@
   "dependencies": {
     "bluebird": "3.5.1",
     "body-parser": "1.18.2",
+    "cheerio": "false1.0.0-rc.2",
     "compression": "1.7.2",
     "cookie-parser": "1.4.3",
     "cors": "2.8.4",
@@ -54,6 +55,7 @@
     "method-override": "^2.3.10",
     "mongoose": "4.7.4",
     "morgan": "1.9.0",
+    "request": "false2.85.0",
     "winston": "2.4.1"
   },
   "devDependencies": {
