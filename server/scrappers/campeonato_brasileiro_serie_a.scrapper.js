@@ -45,7 +45,7 @@ const getRoundMatches = (round) => {
           const date = item.find('.placar-jogo').find('meta[itemprop="startDate"]').attr('content');
           const hour = item.find('.placar-jogo').find('.placar-jogo-informacoes').text().split(' ').pop();
           match.matchDate = new Date(`${date}T${hour}:00Z`);
-          match.league = "Campeonato Brasileiro";
+          match.league = leagues.CAMPEONATO_BRASILEIRO_SERIE_A;
           matches.push(match);
         });
 
