@@ -1,11 +1,11 @@
-require('es6-promise').polyfill();
-
 const cheerio = require('cheerio');
 const request = require('request');
 
+const leagues = require('./leagues.constants');
+
 const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9';
 
-const BRASILEIRAO_ROUNDS = 3;
+const BRASILEIRAO_ROUNDS = 38;
 
 /**
  * Makes a request in order to obtain a html that contains the roud infos.
@@ -45,7 +45,7 @@ const getRoundMatches = (round) => {
           const date = item.find('.placar-jogo').find('meta[itemprop="startDate"]').attr('content');
           const hour = item.find('.placar-jogo').find('.placar-jogo-informacoes').text().split(' ').pop();
           match.matchDate = new Date(`${date}T${hour}:00Z`);
-          match.league = "Campeonato Brasileiro";
+          match.league = leagues.CAMPEONATO_BRASILEIRO_SERIE_A;
           matches.push(match);
         });
 
@@ -82,8 +82,4 @@ const getBrasileiraoMatches = () => {
   });
 };
 
-(() => {
-  getBrasileiraoMatches().then((m) => console.log(m));
-})();
-
-//module.exports = {getBrasileiraoMatches};
+module.exports = {getBrasileiraoMatches};
