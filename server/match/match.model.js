@@ -53,7 +53,7 @@ MatchSchema.statics = {
    * @param {number} endDate - Ending of the date interval.
    * @returns {Promise<Match[]>}
    */
-  list(startDate, endDate) {
+  list (startDate, endDate) {
     let start = new Date();
     start.setHours(0,0,0,0);
 
@@ -65,6 +65,10 @@ MatchSchema.statics = {
     return this.find({matchDate: {$gte: startDate || start, $lte:endDate || end}})
       .sort({ matchDate: -1 })
       .exec();
+  },
+
+  dropModel () {
+    return this.collection.remove();
   }
 };
 

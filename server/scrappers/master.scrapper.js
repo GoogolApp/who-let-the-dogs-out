@@ -1,11 +1,13 @@
 const campeonatoBasileiroSerieA = require('./campeonato_brasileiro_serie_a.scrapper');
+const campeonatoBrasieiroSerieB = require('./campeonato_brasileiro_serie_b.scrapper');
 
 /**
  * List of all leagues scrappers.
  * Each supported League has his own scrapper.
  */
 const scrappers = [
-  campeonatoBasileiroSerieA
+  campeonatoBasileiroSerieA,
+  campeonatoBrasieiroSerieB
 ];
 
 /**

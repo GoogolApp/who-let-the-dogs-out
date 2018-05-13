@@ -5,9 +5,9 @@ Who let the dogs out is an REST API that returns soccer matches from supported L
 
 ### Supported Leagues
 1. Brasileirão Serie A
+2. Brasileirão Serie B
 
 ### Coming soon
-2. Brasileirão Serie B
 3. Brasileirão Serie C
 4. Brasileirão Serie D
 5. Copa do Brasil

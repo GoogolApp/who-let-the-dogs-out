@@ -9,38 +9,40 @@ const scrapper = require('../scrappers/master.scrapper');
  * @property {number} req.query.limit - Limit number of matches to be returned.
  * @returns {Match[]}
  */
-function list(req, res, next) {
+const list = (req, res, next) => {
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
   Match.list(startDate, endDate)
     .then(matches => res.json(matches))
     .catch(e => next(e));
-}
+};
 
 /**
  * Save the passed match in the database.
  * @param newMatch
  * @returns {Promise}
  */
-function saveMatch(newMatch) {
+const _saveMatch = newMatch => {
   const match = new Match(newMatch);
   return match.save();
-}
+};
 
 /**
  * Scrap and update our collection of Matches.
  */
 const updateMatchesCollection = (req, res, next) => {
-  scrapper.getAllMatches().then((arrayOfArraysOfMatches) => {
-    const promises = [];
-    arrayOfArraysOfMatches.forEach((arrayOfMatches) => {
-      arrayOfMatches.forEach((match) => {
-        promises.push(saveMatch(match));
+  Match.dropModel().then(() => {
+    scrapper.getAllMatches().then((arrayOfArraysOfMatches) => {
+      const promises = [];
+      arrayOfArraysOfMatches.forEach((arrayOfMatches) => {
+        arrayOfMatches.forEach((match) => {
+          promises.push(_saveMatch(match));
+        });
       });
+      Promise.all(promises)
+        .then(() => res.json({}))
+        .catch(e => next(e));
     });
-    Promise.all(promises)
-      .then(() => res.json({}))
-      .catch(e => next(e));
   });
 };
 
