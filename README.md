@@ -1,10 +1,25 @@
-# Who let the dogs out woof, woof, woof, woof, woof 
+# Who let the dogs out     woof, woof, woof, woof, woof 
 
 ## Overview
 Who let the dogs out is an REST API that returns soccer matches from supported Leagues.
 
+## Endpoints
+
+### Matches  
+  
+**GET** /api/matches
+    Returns the list of matches that will occur in the interval passed in the query params.  
+    If no query is passed, returns the matches of the actual day.  
+    URL Params:  
+       ´{ startDate=[Date] }´ Beginning of the date interval (included).   
+       ´{ endtDate=[Date] }´ End of the date interval (included).   
+       **Example**: localhost:3001/api/matches?startDate=2018-05-12&endDate=2018-12-22  
+
+
 ### Supported Leagues
 1. Brasileirão Serie A
+
+### Coming soon
 2. Brasileirão Serie B
 3. Brasileirão Serie C
 4. Brasileirão Serie D
