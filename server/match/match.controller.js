@@ -1,5 +1,7 @@
 const Match = require('./match.model');
 
+const scrapper = require('../scrappers/master.scrapper');
+
 
 /**
  * Get match list.
@@ -11,31 +13,35 @@ function list(req, res, next) {
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
   Match.list(startDate, endDate)
-    .then(users => res.json(users))
+    .then(matches => res.json(matches))
     .catch(e => next(e));
 }
-
 
 /**
- * Create a hardcoded match only for tests.
+ * Save the passed match in the database.
+ * @param newMatch
+ * @returns {Promise}
  */
-function create(req, res, next) {
-
-  const matchHardcoded = {
-    homeTeam: "homeTeam",
-    awayTeam: "awayTeam",
-    homeTeamLogoUrl: "homeTeamUrl",
-    awayTeamLogoUrl: "awayTeamUrl",
-    stadium: "Stadium",
-    league: "League",
-    matchDate: Date.now()
-  };
-
-  const match = new Match(matchHardcoded);
-
-  match.save()
-    .then(savedUser => res.json(savedUser))
-    .catch(e => next(e));
+function saveMatch(newMatch) {
+  const match = new Match(newMatch);
+  return match.save();
 }
 
-module.exports = {list, create};
+/**
+ * Scrap and update our collection of Matches.
+ */
+const updateMatchesCollection = (req, res, next) => {
+  scrapper.getAllMatches().then((arrayOfArraysOfMatches) => {
+    const promises = [];
+    arrayOfArraysOfMatches.forEach((arrayOfMatches) => {
+      arrayOfMatches.forEach((match) => {
+        promises.push(saveMatch(match));
+      });
+    });
+    Promise.all(promises)
+      .then(() => res.json({}))
+      .catch(e => next(e));
+  });
+};
+
+module.exports = {list, updateMatchesCollection};

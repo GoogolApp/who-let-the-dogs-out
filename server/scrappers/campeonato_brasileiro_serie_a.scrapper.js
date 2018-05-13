@@ -44,7 +44,7 @@ const getRoundMatches = (round) => {
           match.stadium = item.find('.placar-jogo').find('.placar-jogo-informacoes').find('.placar-jogo-informacoes-local').text();
           const date = item.find('.placar-jogo').find('meta[itemprop="startDate"]').attr('content');
           const hour = item.find('.placar-jogo').find('.placar-jogo-informacoes').text().split(' ').pop();
-          match.matchDate = new Date(`${date}T${hour}:00Z`);
+          match.matchDate = new Date(`${date}T${hour !== '' ? hour : '00:00'}:00Z`);
           match.league = leagues.CAMPEONATO_BRASILEIRO_SERIE_A;
           matches.push(match);
         });
@@ -63,7 +63,7 @@ const getRoundMatches = (round) => {
  *
  * @returns {Promise<[Match]>}
  */
-const getBrasileiraoMatches = () => {
+const getMatches = () => {
   return new Promise((resolve, reject) => {
     const rounds = Array(BRASILEIRAO_ROUNDS + 1).fill().map((e,i)=>i);
     let allMatches = [];
@@ -82,4 +82,4 @@ const getBrasileiraoMatches = () => {
   });
 };
 
-module.exports = {getBrasileiraoMatches};
+module.exports = {getMatches};

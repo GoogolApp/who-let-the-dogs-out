@@ -30,8 +30,7 @@ const MatchSchema = new mongoose.Schema({
     type: Number
   },
   stadium: {
-    type: String,
-    required: true
+    type: String
   },
   league: {
     type: String,
