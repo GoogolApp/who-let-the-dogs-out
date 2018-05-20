@@ -1,6 +1,6 @@
 {
   "name": "who-let-dogs-out",
-  "version": "5.0.0",
+  "version": "0.0.1",
   "description": "A REST API that returns soccer matches.",
   "author": "Vinicius Agostini <viniciusaagostini@gmail.com>",
   "main": "index.js",
@@ -54,6 +54,7 @@
     "method-override": "^2.3.10",
     "mongoose": "4.7.4",
     "morgan": "1.9.0",
+    "node-schedule": "false1.3.0",
     "request": "false2.85.0",
     "winston": "2.4.1"
   },
