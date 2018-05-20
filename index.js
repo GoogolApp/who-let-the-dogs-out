@@ -5,6 +5,8 @@ const util = require('util');
 const config = require('./config/config');
 const app = require('./config/express');
 
+const scheduler = require('./server/helpers/scheduler');
+
 const debug = require('debug')('express-mongoose-es6-rest-api:index');
 
 // make bluebird default Promise
@@ -42,5 +44,8 @@ if (!module.parent) {
     console.info(`server started on port ${config.port} (${config.env})`); // eslint-disable-line no-console
   });
 }
+
+//start scheduler for updating DB
+scheduler.scheduleDBUpdate();
 
 module.exports = app;
