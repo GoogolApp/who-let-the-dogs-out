@@ -21,4 +21,15 @@ const getAllMatches = () => {
   return Promise.all(promises);
 };
 
-module.exports = {getAllMatches};
+/**
+ * Returns a Promise with an array of arrays of teams.
+ */
+const getAllTeams = () => {
+  const promises = [];
+  scrappers.forEach((scrapper) => {
+    promises.push(scrapper.getTeams());
+  });
+  return Promise.all(promises);
+};
+
+module.exports = {getAllMatches, getAllTeams};

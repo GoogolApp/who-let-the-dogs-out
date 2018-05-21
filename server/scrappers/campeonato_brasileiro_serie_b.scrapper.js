@@ -6,6 +6,9 @@ const leagues = require('./leagues.constants');
 const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9';
 
 const BRASILEIRAO_ROUNDS = 38;
+const FIRST_ROUND = 1;
+
+//TODO: Resolve all this duplicated code from campeonato_brasileiro_serie_a.js
 
 /**
  * Makes a request in order to obtain a html that contains the roud infos.
@@ -82,4 +85,30 @@ const getMatches = () => {
   });
 };
 
-module.exports = {getMatches};
+/**
+ * Get all teams from the first round of the League.
+ *
+ * @returns {Promise<[team]>}
+ */
+const getTeams = () => {
+  return new Promise((resolve, reject) => {
+    getRoundMatches(FIRST_ROUND).then((matches) => {
+      const teams = [];
+      matches.forEach((match) => {
+        const homeTeam = {
+          name: match.homeTeam,
+          teamLogoUrl: match.homeTeamLogoUrl
+        };
+        const awayTeam = {
+          name: match.awayTeam,
+          teamLogoUrl: match.awayTeamLogoUrl
+        };
+
+        teams.push(homeTeam, awayTeam);
+      });
+      resolve(teams);
+    }).catch(reject);
+  });
+};
+
+module.exports = {getMatches, getTeams};
