@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 module.exports = {
-  updateMatchCollection: {
+  updateTeamCollection: {
     body: {
       token: Joi.string().required()
     }

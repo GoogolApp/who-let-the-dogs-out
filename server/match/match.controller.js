@@ -1,5 +1,4 @@
 const Match = require('./match.model');
-
 const scrapper = require('../scrappers/master.scrapper');
 
 
@@ -21,6 +20,7 @@ const list = (req, res, next) => {
  * Save the passed match in the database.
  * @param newMatch
  * @returns {Promise}
+ * @private
  */
 const _saveMatch = newMatch => {
   const match = new Match(newMatch);
