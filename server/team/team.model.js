@@ -10,4 +10,10 @@ const TeamSchema = new mongoose.Schema({
   }
 });
 
+TeamSchema.statics = {
+  dropModel () {
+    return this.collection.remove();
+  }
+};
+
 module.exports = mongoose.model('Team', TeamSchema);

@@ -85,6 +85,11 @@ const getMatches = () => {
   });
 };
 
+/**
+ * Get all teams from the first round of the League.
+ *
+ * @returns {Promise<[team]>}
+ */
 const getTeams = () => {
   return new Promise((resolve, reject) => {
     getRoundMatches(FIRST_ROUND).then((matches) => {
