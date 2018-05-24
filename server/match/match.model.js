@@ -1,7 +1,4 @@
-const Promise = require('bluebird');
 const mongoose = require('mongoose');
-const httpStatus = require('http-status');
-const APIError = require('../helpers/APIError');
 
 /**
  * User Schema
@@ -35,6 +32,9 @@ const MatchSchema = new mongoose.Schema({
   league: {
     type: String,
     required: true
+  },
+  round: {
+    type: String
   },
   matchDate: {
     type: Date,

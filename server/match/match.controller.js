@@ -22,27 +22,61 @@ const list = (req, res, next) => {
  * @returns {Promise}
  * @private
  */
-const _saveMatch = newMatch => {
+const _createMatch = newMatch => {
   const match = new Match(newMatch);
   return match.save();
+};
+
+/**
+ * Update an already existing match.
+ * @param info
+ * @param match
+ */
+const _updateMatch = (info, match) => {
+  match.stadium = info.stadium;
+  match.matchDate = info.matchDate;
+  match.homeTeamScore = info.homeTeamScore;
+  match.awayTeamScore = info.awayTeamScore;
+  return match.save();
+};
+
+/**
+ * Search a scrapped Match on DB, if exists update it,
+ *                                else create a new Match
+ *
+ * FIXME: This is not the most efficient way, in fact, this is trash, but works (maybe).
+ */
+const _saveMatch = (scrappedMatch) => {
+  const query = {};
+  query.homeTeam = scrappedMatch.homeTeam;
+  query.awayTeam = scrappedMatch.awayTeam;
+  query.league = scrappedMatch.league;
+  query.round = scrappedMatch.round;
+
+  return Match.find(query).then((foundMatches) => {
+    if(foundMatches.length > 0) {
+      const match = foundMatches[0];
+      return _updateMatch(scrappedMatch, match);
+    } else {
+      return _createMatch(scrappedMatch);
+    }
+  });
 };
 
 /**
  * Scrap and update our collection of Matches.
  */
 const updateMatchesCollection = (req, res, next) => {
-  Match.dropModel().then(() => {
-    scrapper.getAllMatches().then((arrayOfArraysOfMatches) => {
-      const promises = [];
-      arrayOfArraysOfMatches.forEach((arrayOfMatches) => {
-        arrayOfMatches.forEach((match) => {
-          promises.push(_saveMatch(match));
-        });
+  scrapper.getAllMatches().then((arrayOfArraysOfMatches) => {
+    const promises = [];
+    arrayOfArraysOfMatches.forEach((arrayOfMatches) => {
+      arrayOfMatches.forEach((match) => {
+        promises.push(_saveMatch(match));
       });
-      Promise.all(promises)
-        .then(() => res.json({}))
-        .catch(e => next(e));
     });
+    Promise.all(promises)
+      .then(() => res.json({}))
+      .catch(e => next(e));
   });
 };
 
