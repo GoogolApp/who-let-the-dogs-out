@@ -13,6 +13,9 @@ const _saveTeam = newTeam => {
   return team.save();
 };
 
+/**
+ * Update Teams collection.
+ */
 const updateTeamsCollection = (req, res, next) => {
   scrapper.getAllTeams().then((arrayOfArraysOfTeams) => {
     const promises = [];
@@ -29,6 +32,9 @@ const updateTeamsCollection = (req, res, next) => {
   });
 };
 
+/**
+ * List all Teams from the DB.
+ */
 const list = (req, res, next) => {
   Team.list()
     .then((teams) => res.json(teams))
