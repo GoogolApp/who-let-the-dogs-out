@@ -47,6 +47,7 @@ const getRoundMatches = (round) => {
           const hour = item.find('.placar-jogo').find('.placar-jogo-informacoes').text().split(' ').pop();
           match.matchDate = new Date(`${date}T${hour !== '' ? hour : '00:00'}:00Z`);
           match.league = leagues.CAMPEONATO_BRASILEIRO_SERIE_A;
+          match.round = `Rodada ${round}`;
           matches.push(match);
         });
 
