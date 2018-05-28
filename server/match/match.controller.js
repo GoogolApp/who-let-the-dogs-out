@@ -17,6 +17,17 @@ const list = (req, res, next) => {
 };
 
 /**
+ * Get team by id.
+ */
+const getMatchById = (req, res, next) => {
+  Match.get(req.params.matchId)
+    .then(match => {
+      res.json(match);
+    })
+    .catch(err => next(err));
+};
+
+/**
  * Save the passed match in the database.
  * @param newMatch
  * @returns {Promise}
@@ -80,4 +91,4 @@ const updateMatchesCollection = (req, res, next) => {
   });
 };
 
-module.exports = {list, updateMatchesCollection};
+module.exports = {list, updateMatchesCollection, getMatchById};

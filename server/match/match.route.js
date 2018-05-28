@@ -14,4 +14,8 @@ router.route('/')
   /** POST /api/matches - Populate the matches collection*/
   .post([validate(matchValidator.updateMatchCollection), tokenValidator.validateToken], matchCtrl.updateMatchesCollection);
 
+router.route('/:matchId')
+/** GET /api/matches/:matchId - Get match by id  */
+  .get(matchCtrl.getMatchById);
+
 module.exports = router;

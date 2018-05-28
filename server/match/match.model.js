@@ -48,6 +48,15 @@ const MatchSchema = new mongoose.Schema({
  */
 MatchSchema.statics = {
   /**
+   * Get match
+   * @param {ObjectId} id - The objectId of the match.
+   * @returns {Promise<Match>}
+   */
+  get(id) {
+    return this.findById(id).exec();
+  },
+
+  /**
    * List matches in descending order of 'matchDate' timestamp.
    * @param {number} beginDate - Beginning of the date interval.
    * @param {number} endDate - Ending of the date interval.
