@@ -13,6 +13,15 @@ const TeamSchema = new mongoose.Schema({
 
 TeamSchema.statics = {
   /**
+   * Get team
+   * @param {ObjectId} id - The objectId of the team.
+   * @returns {Promise<Team>}
+   */
+  get(id) {
+    return this.findById(id).exec();
+  },
+
+  /**
    * Drop all Team collection.
    * @returns {Promise}
    */

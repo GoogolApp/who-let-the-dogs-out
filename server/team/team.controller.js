@@ -14,6 +14,17 @@ const _saveTeam = newTeam => {
 };
 
 /**
+ * Get team by id.
+ */
+const getTeamById = (req, res, next) => {
+  Team.get(req.params.teamId)
+    .then(team => {
+      res.json(team);
+    })
+    .catch(err => next(err));
+};
+
+/**
  * Update Teams collection.
  */
 const updateTeamsCollection = (req, res, next) => {
@@ -41,4 +52,4 @@ const list = (req, res, next) => {
     .catch(e => next(e));
 };
 
-module.exports = {updateTeamsCollection, list};
+module.exports = {updateTeamsCollection, list, getTeamById};
