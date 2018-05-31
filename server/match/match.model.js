@@ -72,7 +72,7 @@ MatchSchema.statics = {
     // https://stackoverflow.com/questions/29327222/mongodb-find-created-results-by-date-today
 
     return this.find({matchDate: {$gte: startDate || start, $lte:endDate || end}})
-      .sort({ matchDate: -1 })
+      .sort({ matchDate: 1 })
       .exec();
   },
 
