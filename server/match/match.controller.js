@@ -81,11 +81,10 @@ const updateMatchesCollection = (req, res, next) => {
   scrapper.getAllMatches().then((matches) => {
     const promises = [];
     matches.forEach((match) => {
-      console.log(match);
       promises.push(_saveMatch(match));
     });
     Promise.all(promises)
-      .then(() => res.json({}))
+      .then(() => res.json(matches))
       .catch(e => next(e));
   });
 };

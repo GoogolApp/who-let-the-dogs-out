@@ -4,6 +4,8 @@ const moment = require('moment');
 
 const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9';
 
+const NUMBER_OF_DAYS_GAP = 10;
+
 const featuredLeagues = [
   'Copa do Mundo da FIFA™',
   'Amistosos',
@@ -85,10 +87,10 @@ const _getDayMatches = (date) => {
  * @private
  */
 const _getNextMatches = () => {
-  let yesterday = new Date('2018/06/17');
-  //yesterday = new Date(yesterday.setDate(yesterday.getDate() -1));
-  let endDay = new Date('2018/07/01');
-  //endDay = new Date(endDay.setDate(endDay.getDate() + 10));
+  let yesterday = new Date();
+  yesterday = new Date(yesterday.setDate(yesterday.getDate() -1));
+  let endDay = new Date();
+  endDay = new Date(endDay.setDate(endDay.getDate() + NUMBER_OF_DAYS_GAP));
 
   const promises = [];
 
