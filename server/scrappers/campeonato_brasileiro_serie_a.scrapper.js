@@ -110,5 +110,4 @@ const getTeams = () => {
   });
 };
 
-//module.exports = {getMatches, getTeams};
-getRoundMatches(1);
+module.exports = {getMatches, getTeams};

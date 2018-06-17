@@ -44,7 +44,6 @@ const _createMatch = newMatch => {
  * @param match
  */
 const _updateMatch = (info, match) => {
-  //match.stadium = info.stadium;
   match.matchDate = info.matchDate;
   match.homeTeamScore = info.homeTeamScore;
   match.awayTeamScore = info.awayTeamScore;
@@ -62,8 +61,6 @@ const _saveMatch = (scrappedMatch) => {
   query.homeTeam = scrappedMatch.homeTeam;
   query.awayTeam = scrappedMatch.awayTeam;
   query.league = scrappedMatch.league;
-  //query.round = scrappedMatch.round;
-  //console.log(scrappedMatch);
   return Match.find(query).then((foundMatches) => {
     if(foundMatches.length > 0) {
       const match = foundMatches[0];
