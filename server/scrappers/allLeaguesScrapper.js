@@ -87,7 +87,7 @@ const _getDayMatches = (date) => {
 const _getNextMatches = () => {
   let yesterday = new Date('2018/02/17');
   //yesterday = new Date(yesterday.setDate(yesterday.getDate() -1));
-  let endDay = new Date('2018/04/17');
+  let endDay = new Date('2018/03/17');
   //endDay = new Date(endDay.setDate(endDay.getDate() + 10));
 
   const promises = [];
