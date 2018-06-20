@@ -1,6 +1,7 @@
 const campeonatoBasileiroSerieA = require('./campeonato_brasileiro_serie_a.scrapper');
 const campeonatoBrasieiroSerieB = require('./campeonato_brasileiro_serie_b.scrapper');
 const allLeaguesScrapper = require('./allLeaguesScrapper');
+const Match = require('../match/match.model');
 
 /**
  * List of all leagues scrappers.
@@ -18,10 +19,10 @@ const getAllMatches = () => {
 };
 
 /**
- * Returns a Promise with an array of arrays of teams.
+ * Returns a Promise with an array of teams.
  */
 const getAllTeams = async () => {
-  const allMatches = allLeaguesScrapper.getMatches();
+  const allMatches = await Match.find({});
   const allTeams = {};
   allMatches.forEach((match) => {
     allTeams[match.homeTeam] = {
