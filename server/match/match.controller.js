@@ -44,7 +44,6 @@ const _createMatch = newMatch => {
  * @param match
  */
 const _updateMatch = (info, match) => {
-  match.stadium = info.stadium;
   match.matchDate = info.matchDate;
   match.homeTeamScore = info.homeTeamScore;
   match.awayTeamScore = info.awayTeamScore;
@@ -62,8 +61,6 @@ const _saveMatch = (scrappedMatch) => {
   query.homeTeam = scrappedMatch.homeTeam;
   query.awayTeam = scrappedMatch.awayTeam;
   query.league = scrappedMatch.league;
-  query.round = scrappedMatch.round;
-
   return Match.find(query).then((foundMatches) => {
     if(foundMatches.length > 0) {
       const match = foundMatches[0];
@@ -78,15 +75,13 @@ const _saveMatch = (scrappedMatch) => {
  * Scrap and update our collection of Matches.
  */
 const updateMatchesCollection = (req, res, next) => {
-  scrapper.getAllMatches().then((arrayOfArraysOfMatches) => {
+  scrapper.getAllMatches().then((matches) => {
     const promises = [];
-    arrayOfArraysOfMatches.forEach((arrayOfMatches) => {
-      arrayOfMatches.forEach((match) => {
-        promises.push(_saveMatch(match));
-      });
+    matches.forEach((match) => {
+      promises.push(_saveMatch(match));
     });
     Promise.all(promises)
-      .then(() => res.json({}))
+      .then(() => res.json(matches))
       .catch(e => next(e));
   });
 };

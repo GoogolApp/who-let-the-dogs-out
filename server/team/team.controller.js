@@ -28,17 +28,15 @@ const getTeamById = (req, res, next) => {
  * Update Teams collection.
  */
 const updateTeamsCollection = (req, res, next) => {
-  scrapper.getAllTeams().then((arrayOfArraysOfTeams) => {
+  scrapper.getAllTeams().then((teams) => {
     const promises = [];
-    arrayOfArraysOfTeams.forEach((teams) => {
-      teams.forEach((team) => {
-        promises.push(_saveTeam(team));
-      });
+    teams.forEach((team) => {
+      promises.push(_saveTeam(team));
     });
     Promise.all(promises)
-      .then(() => res.json({}))
+      .then(() => res.json(teams))
       .catch(e => {
-        e.code === 11000 ? res.json({}) : next(e);
+        e.code === 11000 ? res.json(teams) : next(e);
       });
   });
 };

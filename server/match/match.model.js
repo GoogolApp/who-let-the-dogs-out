@@ -26,15 +26,9 @@ const MatchSchema = new mongoose.Schema({
   awayTeamScore: {
     type: Number
   },
-  stadium: {
-    type: String
-  },
   league: {
     type: String,
     required: true
-  },
-  round: {
-    type: String
   },
   matchDate: {
     type: Date,
