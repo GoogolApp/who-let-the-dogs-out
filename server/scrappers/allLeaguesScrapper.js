@@ -17,7 +17,11 @@ const featuredLeagues = [
   'Taça Libertadores',
   'Copa do Nordeste',
   'Copa Sul-Americana',
-  'Liga dos Campeões'
+  'Liga dos Campeões',
+  'Campeonato Paulista',
+  'Campeonato Mineiro',
+  'Campeonato Carioca',
+  'Campeonato Gaúcho'
 ];
 
 /**
