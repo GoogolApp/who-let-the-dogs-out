@@ -53,7 +53,7 @@
     "jsonwebtoken": "7.1.9",
     "method-override": "^2.3.10",
     "moment": "false2.22.2",
-    "mongoose": "4.7.4",
+    "mongoose": "4.13.21",
     "morgan": "1.9.1",
     "node-schedule": "false1.3.0",
     "request": "false2.85.0",
